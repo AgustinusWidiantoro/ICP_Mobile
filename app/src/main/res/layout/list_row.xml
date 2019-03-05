@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/createAt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="fullname"
+            android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/fullname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="fullname"
+            android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/name_book"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="name_book"
+            android:textSize="18dp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/description_book"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="description_book"
+            android:textSize="18dp"
+            android:textStyle="bold"/>
+
+    </LinearLayout>
+
+</RelativeLayout>
