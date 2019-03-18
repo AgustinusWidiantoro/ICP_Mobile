@@ -12,15 +12,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 
 import com.example.agustinuswidiantoro.icp_mobile.R;
 import com.example.agustinuswidiantoro.icp_mobile.adapter.BookAdapter;
-import com.example.agustinuswidiantoro.icp_mobile.adapter.CustomAdapter;
 import com.example.agustinuswidiantoro.icp_mobile.model.DataBook;
 import com.example.agustinuswidiantoro.icp_mobile.util.HttpHandler;
 import com.example.agustinuswidiantoro.icp_mobile.util.SessionUtils;
@@ -43,7 +40,6 @@ public class BookActivity extends AppCompatActivity {
     // URL to get books JSON
     String url = "http://test.incenplus.com:5000/books?token=";
     SessionUtils session;
-    CustomAdapter customAdapter;
 
     Button input_book;
 
@@ -181,13 +177,6 @@ public class BookActivity extends AppCompatActivity {
             // Dismiss the progress dialog
             if (pDialog.isShowing())
                 pDialog.dismiss();
-
-//            listView = (ListView) findViewById(R.id.list);
-//
-//            customAdapter = new CustomAdapter(
-//                    BookActivity.this,
-//                    R.layout.list_row, dataBooks);
-//            listView.setAdapter(customAdapter);
 
             // Setup and Handover data to recyclerview
             mBook = (RecyclerView) findViewById(R.id.recyclerBook);
