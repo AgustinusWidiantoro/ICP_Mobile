@@ -23,13 +23,8 @@ import java.util.HashMap;
 
 public class CustomAdapter extends ArrayAdapter<DataBook> {
 
-
     private ArrayList<DataBook> dataBooks;
     private Context context;
-
-//    public CustomAdapter(BookActivity bookActivity, ArrayList<HashMap<String,String>> dataBooks, int list_row, String[] strings, int[] ints) {
-//        super();
-//    }
 
     // View lookup cache
     private static class ViewHolder {
@@ -38,7 +33,6 @@ public class CustomAdapter extends ArrayAdapter<DataBook> {
         TextView txtNameBook;
         TextView txtDescriptionBook;
     }
-
 
     public CustomAdapter(Context context, int textViewResourceId,
                          ArrayList<DataBook> dataBooks) {
@@ -95,15 +89,14 @@ public class CustomAdapter extends ArrayAdapter<DataBook> {
             @Override
             public void onClick(View v) {
 //                Toast.makeText(context, dataBooks.get(position).getId(), Toast.LENGTH_LONG).show();
-//                Intent intent = new Intent(context, UpdateBookActivity.class);
                 String id = dataBooks.get(position).getId();
                 String name = dataBooks.get(position).getName_book();
                 String description = dataBooks.get(position).getDescription_book();
 
                 context.startActivity(new Intent(context, UpdateBookActivity.class)
-                        .putExtra("Id_Book", id)
-                        .putExtra("Name_Book", name)
-                        .putExtra("Description_Book", description)
+                        .putExtra("Id_book", id)
+                        .putExtra("Name_book", name)
+                        .putExtra("Description_book", description)
                         .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
 
             }

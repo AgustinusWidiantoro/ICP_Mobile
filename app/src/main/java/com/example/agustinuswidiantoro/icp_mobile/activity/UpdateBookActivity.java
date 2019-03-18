@@ -39,7 +39,7 @@ public class UpdateBookActivity extends AppCompatActivity {
 
     SessionUtils session;
 
-    // URL to get contacts JSON
+    // URL to get JSON
     String url = "http://test.incenplus.com:5000/books/edit?token=";
 
     @Override
@@ -53,14 +53,13 @@ public class UpdateBookActivity extends AppCompatActivity {
         edit_name = (EditText) findViewById(R.id.edit_namebook);
         edit_description = (EditText) findViewById(R.id.edit_description);
 
-
         // Set edittext
         Intent intent = getIntent();
         //get the attached extras from the intent
         //we should use the same key as we used to attach the data.
-        final String id = intent.getStringExtra("Id_Book");
-        final String name = intent.getStringExtra("Name_Book");
-        final String description = intent.getStringExtra("Description_Book");
+        final String id = intent.getStringExtra("Id_book");
+        final String name = intent.getStringExtra("Name_book");
+        final String description = intent.getStringExtra("Description_book");
 
         edit_name.setText(name);
         edit_description.setText(description);
@@ -126,7 +125,6 @@ public class UpdateBookActivity extends AppCompatActivity {
 
             Log.e("Data ", String.valueOf(data));
 
-            String text = "";
             BufferedReader reader = null;
             StringBuilder sb = new StringBuilder();
             try {
@@ -180,14 +178,10 @@ public class UpdateBookActivity extends AppCompatActivity {
             finish();
 
         }
-
-
-
     }
 
     @Override
-    public void onBackPressed()
-    {
+    public void onBackPressed() {
         // code here to show dialog
         startActivity(new Intent(getApplicationContext(), BookActivity.class)
                 .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));

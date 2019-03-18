@@ -36,7 +36,7 @@ public class SessionUtils {
         // Storing login value as TRUE
         editor.putBoolean(IS_LOGIN, true);
 
-        // Storing name in pref
+        // Storing token in pref
         editor.putString(KEY_TOKEN, token);
 
         // commit changes

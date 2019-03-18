@@ -99,7 +99,6 @@ public class InsertBookActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-            String text = "";
             BufferedReader reader = null;
             StringBuilder sb = new StringBuilder();
             try {

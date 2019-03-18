@@ -68,9 +68,6 @@ public class UserProfileActivity extends AppCompatActivity {
 
                 new Logout().execute();
 
-                startActivity(new Intent(UserProfileActivity.this, LoginActivity.class)
-                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
-                finish();
             }
         });
 
@@ -98,6 +95,10 @@ public class UserProfileActivity extends AppCompatActivity {
             String name = user_token.get(SessionUtils.KEY_TOKEN);
 
             Log.e(TAG, "Session clear: " + name);
+
+            startActivity(new Intent(getApplicationContext(), LoginActivity.class)
+                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+            finish();
 
             return null;
         }

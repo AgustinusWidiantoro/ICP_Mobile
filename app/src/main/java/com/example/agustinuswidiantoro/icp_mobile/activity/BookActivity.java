@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,6 +19,7 @@ import android.widget.Toast;
 
 
 import com.example.agustinuswidiantoro.icp_mobile.R;
+import com.example.agustinuswidiantoro.icp_mobile.adapter.BookAdapter;
 import com.example.agustinuswidiantoro.icp_mobile.adapter.CustomAdapter;
 import com.example.agustinuswidiantoro.icp_mobile.model.DataBook;
 import com.example.agustinuswidiantoro.icp_mobile.util.HttpHandler;
@@ -33,17 +36,19 @@ public class BookActivity extends AppCompatActivity {
 
     ArrayList<DataBook> dataBooks;
     ListView listView;
-    private static CustomAdapter adapter;
 
     private String TAG = BookActivity.class.getSimpleName();
     private ProgressDialog pDialog;
 
-    // URL to get contacts JSON
+    // URL to get books JSON
     String url = "http://test.incenplus.com:5000/books?token=";
     SessionUtils session;
     CustomAdapter customAdapter;
 
     Button input_book;
+
+    RecyclerView mBook;
+    BookAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,10 +59,9 @@ public class BookActivity extends AppCompatActivity {
         input_book.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), InsertBookActivity.class);
-                startActivity(i);
+                startActivity(new Intent(getApplicationContext(), InsertBookActivity.class)
+                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
                 finish();
-
             }
         });
 
@@ -138,7 +142,7 @@ public class BookActivity extends AppCompatActivity {
 //                        book.put("description", description);
 //                        book.put("name", name_book);
 
-                        // adding contact to contact list
+                        // adding book to book list
                         dataBooks.add(book);
                     }
                 } catch (final JSONException e) {
@@ -178,22 +182,19 @@ public class BookActivity extends AppCompatActivity {
             if (pDialog.isShowing())
                 pDialog.dismiss();
 
-            listView = (ListView) findViewById(R.id.list);
+//            listView = (ListView) findViewById(R.id.list);
+//
+//            customAdapter = new CustomAdapter(
+//                    BookActivity.this,
+//                    R.layout.list_row, dataBooks);
 //            listView.setAdapter(customAdapter);
 
-//            ListAdapter adapter = new SimpleAdapter(
-//                    BookActivity.this, dataBooks,
-//                    R.layout.list_row, new String[]{"id",
-//                    "fullname", "name", "description"}, new int[]{R.id.createAt,
-//                    R.id.fullname, R.id.name_book, R.id.description_book});
-//
-//            listView.setAdapter(adapter);
+            // Setup and Handover data to recyclerview
+            mBook = (RecyclerView) findViewById(R.id.recyclerBook);
+            mAdapter = new BookAdapter(BookActivity.this, dataBooks);
+            mBook.setAdapter(mAdapter);
+            mBook.setLayoutManager(new LinearLayoutManager(BookActivity.this));
 
-
-            customAdapter = new CustomAdapter(
-                    BookActivity.this,
-                    R.layout.list_row, dataBooks);
-            listView.setAdapter(customAdapter);
         }
     }
 

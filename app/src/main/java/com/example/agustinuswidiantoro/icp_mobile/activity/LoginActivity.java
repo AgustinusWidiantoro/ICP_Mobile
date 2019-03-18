@@ -3,6 +3,7 @@ package com.example.agustinuswidiantoro.icp_mobile.activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -34,7 +35,7 @@ public class LoginActivity extends AppCompatActivity {
     private String TAG = LoginActivity.class.getSimpleName();
     private ProgressDialog pDialog;
 
-    // URL to get contacts JSON
+    // URL to get JSON
     String url = "http://test.incenplus.com:5000/users/login";
 
     SessionUtils session;
@@ -108,7 +109,6 @@ public class LoginActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-            String text = "";
             BufferedReader reader = null;
             StringBuilder sb = new StringBuilder();
             try {
@@ -176,9 +176,13 @@ public class LoginActivity extends AppCompatActivity {
 
                     session.createLoginSession(token);
 
-                    // Staring LoginActivity
-                    Intent i = new Intent(getApplicationContext(), BookActivity.class);
-                    startActivity(i);
+//                    // Staring LoginActivity
+//                    Intent i = new Intent(getApplicationContext(), BookActivity.class);
+//                    startActivity(i);
+//                    finish();
+
+                    startActivity(new Intent(LoginActivity.this, BookActivity.class)
+                            .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
                     finish();
 
                 } catch (final JSONException e) {
@@ -206,6 +210,27 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 });
             }
+        }
+
+    }
+
+    private Boolean exit = false;
+
+    @Override
+    public void onBackPressed() {
+        if (exit) {
+            finish(); // finish activity
+        } else {
+            Toast.makeText(this, "Press Back again to Exit.",
+                    Toast.LENGTH_SHORT).show();
+            exit = true;
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    exit = false;
+                }
+            }, 3 * 1000);
+
         }
 
     }
